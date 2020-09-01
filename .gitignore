@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .vscode/
 second.py
 
@@ -5,6 +6,8 @@ second.py
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode
 
 ### Python ###
+=======
+>>>>>>> 4ee104df82ac87f472612e5f4faf3d5015f33b63
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -57,7 +60,10 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+<<<<<<< HEAD
 pytestdebug.log
+=======
+>>>>>>> 4ee104df82ac87f472612e5f4faf3d5015f33b63
 
 # Translations
 *.mo
@@ -78,7 +84,10 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+<<<<<<< HEAD
 doc/_build/
+=======
+>>>>>>> 4ee104df82ac87f472612e5f4faf3d5015f33b63
 
 # PyBuilder
 target/
@@ -136,6 +145,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+<<<<<<< HEAD
 
 # pytype static type analyzer
 .pytype/
@@ -153,3 +163,5 @@ dmypy.json
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
+=======
+>>>>>>> 4ee104df82ac87f472612e5f4faf3d5015f33b63
