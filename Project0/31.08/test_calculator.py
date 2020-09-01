@@ -2,6 +2,7 @@ from calculator import calculator
 import pytest
 from math import pi
 
+
 @pytest.mark.parametrize(
     "arg, expected_output", [[(-1, -1), -2], [(1, 1), 2], [(1, 0), 1]]
     )
