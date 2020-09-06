@@ -1,0 +1,5 @@
+sphinx
+matplotlib
+numpy
+numba
+pytest
