@@ -28,8 +28,8 @@ class Pendulum():
         time = np.linspace(0, T, int(time))
         sol = solve_ivp(self.__call__, t, y0, t_eval=time)
         self.solution_t = np.array(sol.t)
-        self.solution_theta = np.array(sol.y[0])
-        self.solution_omega = np.array(sol.y[1])
+        self.solution_omega = np.array(sol.y[0])
+        self.solution_theta = np.array(sol.y[1])
 
         self.x1 = self.L * sin(self.theta)
         self.y1 = -self.L * cos(self.theta)
@@ -73,8 +73,8 @@ class Pendulum():
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
-    ODE = Pendulum(2.7, 1)
-    ODE.solve([1, 1], 10, 0.1)
+    ODE = Pendulum(1, 1)
+    ODE.solve([pi/2, 0], 10, 0.05)
     t = ODE.t
     x = ODE.x
     y = ODE.y

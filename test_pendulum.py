@@ -24,8 +24,7 @@ def test_solve():
 def test_solveError():
     ODE = pendulum.Pendulum(1, 1)
     with pytest.raises(AttributeError):
-        assert np.all(ODE.theta) == 0 and np.all(ODE.omega) == 0 and np.array_equal(ODE.t, np.linspace(0, 10, 100))
-
+        assert ODE.theta and ODE.omega and ODE.t
 
 @pytest.mark.parametrize(
     "y", [(-109/60, 0.15)]
