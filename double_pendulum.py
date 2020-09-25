@@ -1,5 +1,6 @@
 import numpy as np
 from numpy import sin, cos, pi
+
 G = 9.81
 
 class DoublePendulum():
@@ -63,4 +64,6 @@ class DoublePendulum():
     def omega2(self):
         return self.solution_omega2
 
-    
+
+if __name__ == "__main__":
+    print("Hei")
