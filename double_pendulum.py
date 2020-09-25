@@ -13,7 +13,7 @@ class DoublePendulum():
         theta1, omega1, theta2, omega2, = y
         thetaD = theta2 - theta1
         f = [(omega1, self.M2 * self.L1 * omega1**2 * sin(thetaD) * cos(thetaD) 
-        + self.M2*G*sin(theta2)*cos(thetaD) 
+        + self.M2 * G * sin(theta2)*cos(thetaD) 
         + self.M2*self.L2*omega2**2 * sin(thetaD) 
         - (self.M1 + self.M2)*G*sin(self.theta1)) / (self.M1 + self.M2) * self.L1 - self.M2*self.L1*cos(thetaD)**2, 
 
