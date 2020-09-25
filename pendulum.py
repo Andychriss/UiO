@@ -46,15 +46,43 @@ class Pendulum():
     def omega(self):
         return self.solution_omega
 
+    @property
+    def potential(self):
+        return self.M * g * (self.y + self.L)
+
+    @property
+    def vx(self):
+        return np.gradient(self.x, self.t)
+    
+    @property
+    def vy(self):
+        return np.gradient(self.y, self.t)
+    
+    @property
+    def kinetic(self):
+        return 0.5 * self.M * (self.vx**2 + self.vy**2)
+    
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
     ODE = Pendulum(2.7, 1)
     ODE.solve([1, 1], 10, 0.1)
+    print("T")
     print(ODE.t)
+    print("Theta")
     print(ODE.theta)
+    print("Omega")
     print(ODE.omega)
     plt.plot(ODE.t, ODE.theta, color = "Green")
     plt.plot(ODE.t, ODE.omega, color = "Red")
-    plt.show()
+    #plt.show()
+    print("X")
     print(ODE.x)
+    print("Potential")
+    print(ODE.potential)
+    print(ODE.y)
+    print(ODE.vx)
+    print(ODE.vy)
+    plt.plot(ODE.t, ODE.kinetic)
+    plt.show()
+    
