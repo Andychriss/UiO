@@ -80,5 +80,14 @@ if __name__ == "__main__":
     y = ODE.y
     plt.plot(t, x, color = "red", label = "x")
     plt.plot(t, y, color = "blue", label = "y")
+
+    kinetic = ODE.kinetic
+    potential = ODE.potential
+    total = kinetic + potential
+
+    plt.plot(t, kinetic, color = "yellow", label = "kinetic")
+    plt.plot(t, potential, color = "green", label = "potential")
+
+    plt.plot(t, total, color = "black", label = "Total Energy")
     plt.legend()
     plt.show()
