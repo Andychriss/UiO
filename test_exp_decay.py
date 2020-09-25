@@ -1,6 +1,7 @@
 import exp_decay
 import pytest
 
+
 def test_ExpontentialDecay():
     ODE = exp_decay.ExponetialDecay(0.4)
     ODEder = ODE(1, 3.2)
