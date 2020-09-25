@@ -18,7 +18,7 @@ class DoublePendulum():
         f = [(omega1, self.M2 * self.L1 * omega1**2 * sin(thetaD) * cos(thetaD) 
         + self.M2 * G * sin(theta2)*cos(thetaD) 
         + self.M2*self.L2*omega2**2 * sin(thetaD) 
-        - (self.M1 + self.M2)*G*sin(theta1)) / (self.M1 + self.M2) * self.L1 - self.M2*self.L1*cos(thetaD)**2, 
+        - (self.M1 + self.M2)*G*sin(theta1)) / ((self.M1 + self.M2) * self.L1 - self.M2*self.L1*cos(thetaD)**2), 
 
         (-self.M2 * self.L2 * omega2**2 * np.sin(thetaD) * np.cos(thetaD) \
         + (self.M1 + self.M2) * G * np.sin(theta1) * np.cos(thetaD) \
@@ -63,8 +63,6 @@ class DoublePendulum():
     def y2(self):
         return self.y1
 
-
-
     @property
     def t(self):
         return self.solution_t
@@ -84,7 +82,6 @@ class DoublePendulum():
     @property
     def omega2(self):
         return self.solution_omega2
-<<<<<<< HEAD
 
     @property
     def vx1(self):
@@ -110,6 +107,16 @@ class DoublePendulum():
     
     @property
     def kinetic(self):
-        k_1 = 0.5 * self.M1
-=======
->>>>>>> 75ed22c9b1ea4c4b4da9bfd17e7f2fda06a483a0
+        k_1 = 0.5 * self.M1 * (self.vx1**2 + self.vy1**2)
+        k_2 = 0.5 * self.M2 * (self.vx2**2 + self.vy2**2)
+        return k_1 + k_2
+
+if __name__ == "__main__":
+    import matplotlib.pyplot as plt
+    ODE = DoublePendulum(1, 1, 1, 1)
+    ODE.solve([pi/2, pi/2, 0, 0], 10, 0.1)
+    plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
+    plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
+
+    plt.legend()
+    plt.show()
