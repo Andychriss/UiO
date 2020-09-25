@@ -1,5 +1,5 @@
 import numpy as np
-from numpy import sin, pi
+from numpy import sin, cos, pi
 from scipy.integrate import solve_ivp
 
 
@@ -31,6 +31,9 @@ class Pendulum():
         self.solution_theta = np.array(sol.y[0])
         self.solution_omega = np.array(sol.y[1])
 
+        self.x = self.L * sin(self.theta)
+        self.y = -self.L * cos(self.theta)
+
     @property
     def t(self):
         return self.solution_t
@@ -54,3 +57,4 @@ if __name__ == "__main__":
     plt.plot(ODE.t, ODE.theta, color = "Green")
     plt.plot(ODE.t, ODE.omega, color = "Red")
     plt.show()
+    print(ODE.x)
