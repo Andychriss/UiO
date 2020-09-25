@@ -1,5 +1,6 @@
 import numpy as np
 from numpy import sin, cos, pi
+from scipy.integrate import solve_ivp
 
 G = 9.81
 
@@ -41,9 +42,6 @@ class DoublePendulum():
         self.solution_theta2 = np.array(sol.y[2])
         self.solution_omega2 = np.array(sol.y[3])
 
-        self.x1 = self.L * sin(self.theta)
-        self.y1 = -self.L * cos(self.theta)
-
     @property
     def t(self):
         return self.solution_t
@@ -64,6 +62,3 @@ class DoublePendulum():
     def omega2(self):
         return self.solution_omega2
 
-
-if __name__ == "__main__":
-    print("Hei")
