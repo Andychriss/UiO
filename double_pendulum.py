@@ -119,5 +119,6 @@ if __name__ == "__main__":
     plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
 
+    
     plt.legend()
     plt.show()
