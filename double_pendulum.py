@@ -15,6 +15,7 @@ class DoublePendulum():
         #return derivative of y
         theta1, omega1, theta2, omega2 = y
         thetaD = theta2 - theta1
+<<<<<<< HEAD
         f = [omega1, self.M2 * self.L1 * omega1**2 * sin(thetaD) * cos(thetaD) 
         + self.M2 * G * sin(theta2)*cos(thetaD) 
         + self.M2*self.L2*omega2**2 * sin(thetaD) 
@@ -24,6 +25,10 @@ class DoublePendulum():
         + (self.M1 + self.M2) * G * np.sin(theta1) * np.cos(thetaD) \
         - (self.M1 + self.M2) * self.L1 * omega1**2 * np.sin(thetaD) \
         - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(thetaD)**2]
+=======
+        f = [omega1, (self.M2 * self.L1 * omega1**2 * sin(thetaD) * cos(thetaD) + self.M2 * G * sin(theta2)*cos(thetaD) + self.M2*self.L2*omega2**2 * sin(thetaD) - (self.M1 + self.M2)*G*sin(theta1)) / ((self.M1 + self.M2) * self.L1 - self.M2*self.L1*cos(thetaD)**2), omega2, (-self.M2 * self.L2 * omega2**2 * np.sin(thetaD) * np.cos(thetaD) + (self.M1 + self.M2) * G * np.sin(theta1) * np.cos(thetaD) - (self.M1 + self.M2) * self.L1 * omega1**2 * np.sin(thetaD) - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(thetaD)**2)]
+        print(len(f))
+>>>>>>> e36fcbdec3a7161c9d5554df7c53a02ee0284727
         return f
     
     def solve(self, y0, T, dt, angles="rad"):
@@ -114,7 +119,11 @@ class DoublePendulum():
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     ODE = DoublePendulum(1, 1, 1, 1)
+<<<<<<< HEAD
     ODE.solve(np.array([pi/2, 0, 0, 0]), 10, 0.1)
+=======
+    ODE.solve([0, 0, 0, 0], 10, 0.1)
+>>>>>>> e36fcbdec3a7161c9d5554df7c53a02ee0284727
     plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
 
