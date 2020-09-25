@@ -62,3 +62,28 @@ class DoublePendulum():
     def omega2(self):
         return self.solution_omega2
 
+    @property
+    def vx1(self):
+        return np.gradient(self.x1)
+    
+    @property
+    def vx2(self):
+        return np.gradient(self.x2)
+
+    @property
+    def vy1(self):
+        return np.gradient(self.y1)
+
+    @property
+    def vy2(self):
+        return np.gradient(self.y2)
+
+    @property
+    def potential(self):
+        p_1 = self.M1 * G * (self.y1 + self.L1)
+        p_2 = self.M2 * G * (self.y2 + self.L1 + self.L2)
+        return p_1 + p_2
+    
+    @property
+    def kinetic(self):
+        k_1 = 0.5 * self.M1

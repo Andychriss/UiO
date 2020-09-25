@@ -29,13 +29,8 @@ class Pendulum():
         sol = solve_ivp(self.__call__, t, y0, t_eval=time)
 
         self.solution_t = np.array(sol.t)
-<<<<<<< HEAD
-        self.solution_omega = np.array(sol.y[0])
-        self.solution_theta = np.array(sol.y[1])
-=======
         self.solution_theta = np.array(sol.y[1])
         self.solution_omega = np.array(sol.y[0])
->>>>>>> 36ef904aeac430df63a83e3ded2f667ea73d0448
 
         self.x1 = self.L * sin(self.theta)
         self.y1 = -self.L * cos(self.theta)
@@ -91,13 +86,8 @@ class DampenedPendulum(Pendulum):
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
-<<<<<<< HEAD
-    ODE = Pendulum(1, 1)
-    ODE.solve([pi/2, 0], 10, 0.05)
-=======
     ODE = DampenedPendulum(1, 1, .1)
     ODE.solve([pi/2, 1], 10, 0.01)
->>>>>>> 36ef904aeac430df63a83e3ded2f667ea73d0448
     t = ODE.t
     x = ODE.x
     y = ODE.y
