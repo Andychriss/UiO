@@ -66,19 +66,19 @@ class DoublePendulum():
         self.y2 = self.y1 -self.L2 * cos(self.solution_theta2)
 
     @property
-    def x1(self):
+    def x_1(self):
         return self.x1
 
     @property
-    def y1(self):
+    def y_1(self):
         return self.y1
     
     @property
-    def x2(self):
+    def x_2(self):
         return self.x1
 
     @property
-    def y2(self):
+    def y_2(self):
         return self.y1
 
     @property
@@ -103,24 +103,24 @@ class DoublePendulum():
 
     @property
     def vx1(self):
-        return np.gradient(self.x1)
+        return np.gradient(self.x_1)
     
     @property
     def vx2(self):
-        return np.gradient(self.x2)
+        return np.gradient(self.x_2)
 
     @property
     def vy1(self):
-        return np.gradient(self.y1)
+        return np.gradient(self.y_1)
 
     @property
     def vy2(self):
-        return np.gradient(self.y2)
+        return np.gradient(self.y_2)
 
     @property
     def potential(self):
-        p_1 = self.M1 * G * (self.y1 + self.L1)
-        p_2 = self.M2 * G * (self.y2 + self.L1 + self.L2)
+        p_1 = self.M1 * G * (self.y_1 + self.L1)
+        p_2 = self.M2 * G * (self.y_2 + self.L1 + self.L2)
         return p_1 + p_2
     
     @property
