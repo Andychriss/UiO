@@ -42,6 +42,29 @@ class DoublePendulum():
         self.solution_theta2 = np.array(sol.y[2])
         self.solution_omega2 = np.array(sol.y[3])
 
+        self.x1 = self.L1 * sin(self.solution_theta1)
+        self.y1 = -self.L1 * cos(self.solution_theta1)
+        self.x2 = self.x1 + self.L2 * sin(self.solution_theta2)
+        self.y2 = self.y1 -self.L2 * cos(self.solution_theta2)
+
+    @property
+    def x1(self):
+        return self.x1
+
+    @property
+    def y1(self):
+        return self.y1
+    
+    @property
+    def x2(self):
+        return self.x1
+
+    @property
+    def y2(self):
+        return self.y1
+
+
+
     @property
     def t(self):
         return self.solution_t
@@ -61,4 +84,3 @@ class DoublePendulum():
     @property
     def omega2(self):
         return self.solution_omega2
-
