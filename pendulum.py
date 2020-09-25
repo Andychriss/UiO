@@ -75,7 +75,10 @@ if __name__ == "__main__":
 
     ODE = Pendulum(2.7, 1)
     ODE.solve([1, 1], 10, 0.1)
-    t, x, y = ODE.t, ODE.x, ODE.y
-    plt.plot(t, x, color = "red", label "x")
-    plt.plot(t, y, color = "blue", label "y")
-    
+    t = ODE.t
+    x = ODE.x
+    y = ODE.y
+    plt.plot(t, x, color = "red", label = "x")
+    plt.plot(t, y, color = "blue", label = "y")
+    plt.legend()
+    plt.show()
