@@ -39,9 +39,12 @@ class DoublePendulum():
         + (self.M1 + self.M2) * G * np.sin(theta1) * np.cos(thetaD) 
         - (self.M1 + self.M2) * self.L1 * omega1**2 * np.sin(thetaD) 
         - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(thetaD)**2)]
+<<<<<<< HEAD
 >>>>>>> 7bc2bd9a9316704c9400191ed5a78874e1131ee5
         print(len(f))
 >>>>>>> e36fcbdec3a7161c9d5554df7c53a02ee0284727
+=======
+>>>>>>> 1a215612b80a0989ac7fc684449b477971d85b77
         return f
     
     def solve(self, y0, T, dt, angles="rad"):
@@ -133,10 +136,14 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     ODE = DoublePendulum(1, 1, 1, 1)
 <<<<<<< HEAD
+<<<<<<< HEAD
     ODE.solve(np.array([pi/2, 0, 0, 0]), 10, 0.1)
 =======
     ODE.solve([0, 0, 0, 0], 10, 0.1)
 >>>>>>> e36fcbdec3a7161c9d5554df7c53a02ee0284727
+=======
+    ODE.solve([pi/6, pi/6, 0, 0], 10, 0.1)
+>>>>>>> 1a215612b80a0989ac7fc684449b477971d85b77
     plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
 
