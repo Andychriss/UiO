@@ -21,7 +21,7 @@ class DoublePendulum():
         (-self.M2 * self.L2 * omega2**2 * np.sin(thetaD) * np.cos(thetaD) \
         + (self.M1 + self.M2) * G * np.sin(theta1) * np.cos(thetaD) \
         - (self.M1 + self.M2) * self.L1 * omega1**2 * np.sin(thetaD) \
-        - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(delta(theta1, theta2))**2)]
+        - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(thetaD)**2)]
         return f
     
     def solve(self, y0, T, dt, angles="rad"):
