@@ -31,8 +31,16 @@ class Pendulum():
         self.solution_theta = np.array(sol.y[0])
         self.solution_omega = np.array(sol.y[1])
 
-        self.x = self.L * sin(self.theta)
-        self.y = -self.L * cos(self.theta)
+        self.x1 = self.L * sin(self.theta)
+        self.y1 = -self.L * cos(self.theta)
+
+    @property
+    def x(self):
+        return self.x1
+
+    @property
+    def y(self):
+        return self.y1
 
     @property
     def t(self):
