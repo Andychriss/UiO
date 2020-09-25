@@ -13,17 +13,17 @@ class DoublePendulum():
 
     def __call__(self, t, y):
         #return derivative of y
-        theta1, omega1, theta2, omega2, = y
+        theta1, omega1, theta2, omega2 = y
         thetaD = theta2 - theta1
-        f = [(omega1, self.M2 * self.L1 * omega1**2 * sin(thetaD) * cos(thetaD) 
+        f = [omega1, self.M2 * self.L1 * omega1**2 * sin(thetaD) * cos(thetaD) 
         + self.M2 * G * sin(theta2)*cos(thetaD) 
         + self.M2*self.L2*omega2**2 * sin(thetaD) 
-        - (self.M1 + self.M2)*G*sin(theta1)) / ((self.M1 + self.M2) * self.L1 - self.M2*self.L1*cos(thetaD)**2), 
+        - (self.M1 + self.M2)*G*sin(theta1) / ((self.M1 + self.M2) * self.L1 - self.M2*self.L1*cos(thetaD)**2), omega2,
 
         (-self.M2 * self.L2 * omega2**2 * np.sin(thetaD) * np.cos(thetaD) \
         + (self.M1 + self.M2) * G * np.sin(theta1) * np.cos(thetaD) \
         - (self.M1 + self.M2) * self.L1 * omega1**2 * np.sin(thetaD) \
-        - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(thetaD)**2)]
+        - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(thetaD)**2]
         return f
     
     def solve(self, y0, T, dt, angles="rad"):
@@ -36,11 +36,11 @@ class DoublePendulum():
         time = np.linspace(0, T, int(time))
         sol = solve_ivp(self.__call__, t, y0, t_eval=time)
 
-        self.solution_t = np.array(sol.t)
-        self.solution_theta1 = np.array(sol.y[0])
-        self.solution_omega1 = np.array(sol.y[1])
-        self.solution_theta2 = np.array(sol.y[2])
-        self.solution_omega2 = np.array(sol.y[3])
+        self.solution_t = sol.t
+        self.solution_theta1 = sol.y[0]
+        self.solution_omega1 = sol.y[1]
+        self.solution_theta2 = sol.y[2]
+        self.solution_omega2 = sol.y[3]
 
         self.x1 = self.L1 * sin(self.solution_theta1)
         self.y1 = -self.L1 * cos(self.solution_theta1)
@@ -114,7 +114,7 @@ class DoublePendulum():
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     ODE = DoublePendulum(1, 1, 1, 1)
-    ODE.solve([pi/2, pi/2, 0, 0], 10, 0.1)
+    ODE.solve(np.array([pi/2, 0, 0, 0]), 10, 0.1)
     plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
 

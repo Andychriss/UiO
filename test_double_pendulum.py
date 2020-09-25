@@ -1,6 +1,7 @@
 import numpy as np
-from numpy import sin, cos
+from numpy import sin, cos, pi
 import pytest
+import double_pendulum
 
 G = 9.81
 M1 = 1
@@ -72,3 +73,10 @@ def test_domega2_dt(theta1, theta2, expected):
         abs(domega2_dt(M1, M2, L1, L2, theta1, theta2, omega1, omega2) - expected)
         < 1e-10
     )
+
+
+def test_solve():
+    ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
+    ODE.solve([0, 0, 0, 0], 10, 0.1)
+    assert np.all(ODE.theta1) == 0 and np.all(ODE.theta2) == 0 and np.all(
+        ODE.omega1) == 0 and ODE.omega2 == 0 and np.array_equal(ODE.t, np.linspace(0, 10, 100))
