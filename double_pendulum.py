@@ -1,7 +1,10 @@
 import numpy as np
 from numpy import sin, cos, pi
 from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
 
+from matplotlib.animation import FuncAnimation
+        
 G = 9.81
 
 class DoublePendulum():
@@ -35,6 +38,8 @@ class DoublePendulum():
         self.angles = angles
         if angles == 'deg':
             y0 = y0*(pi/180)
+
+        self.dt = dt
 
         t = (0, T)
         time = T/dt
@@ -122,17 +127,28 @@ class DoublePendulum():
         return k_1, k_2
         
 
-if __name__ == "__main__":
-    import matplotlib.pyplot as plt
+    def create_animation(self):    
+        # Create empty figure
+        fig = plt.figure()
 
-    ODE = DoublePendulum()
-    ODE.solve([pi/2, pi/2, pi/2, pi/2], 10, 0.01)
-    plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
-    plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
-    
+        # Configure figure
+        plt.axis('equal')
+
+        # Make an "empty" plot object to be updated throughout the animation
+        self.pendulums = plt.plot([], [], 'o-', lw=2)
+
+        # Call FuncAnimation
+        self.animation = animation.FuncAnimation(fig,
+                                                 self._next_frame,
+                                                 frames=range(len(self.x1)),
+                                                 repeat=None,
+                                                 interval=1000*self.dt,
+                                                 blit=True)
+
+if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
-    ODE.solve([pi/6, pi/6, 0,  0], 10, 1)
-    print(ODE.x1)
+    ODE.solve([pi/2, pi/2, 0,  0], 10, .1)
+    """print(ODE.x1)
     print(ODE.x2)
     print(ODE.vx2)
     plt.plot(ODE.t, ODE.kinetic[0], color = "red", label = "Kinetic")
@@ -144,27 +160,23 @@ if __name__ == "__main__":
 
     plt.plot(ODE.t, ODE.vx1, color = "green", label = "x1")
     plt.plot(ODE.t, ODE.vx2, color = "grey", label = "x2")
+"""
+    fig = plt.figure()
 
+    # Configure figure
+    
+    
+    for i in range(len(ODE.t)):
+        plt.axis('equal')
+        plt.axis('off')
+        plt.axis((-3, 3, -3, 3))
+        plt.plot([ODE.x1[i], 0], [ODE.y1[i], 0])
+        plt.plot([ODE.x2[i], ODE.x1[i]], [ODE.y2[i], ODE.y1[i]])
+        plt.scatter(ODE.x1[i], ODE.y1[i])
+        plt.scatter(ODE.x2[i], ODE.y2[i])
+        plt.show()
     plt.legend()
     plt.show()
 
-    from matplotlib.animation import FuncAnimation
-    def create_animation(self):
-        # Create empty figure
-        fig = plt.figure()
-
-        # Configure figure
-        plt.axis('equal')
-
-        # Make an "empty" plot object to be updated throughout the animation
-        self.pendulums, = plt.plot([], [], 'o-', lw=2)
-
-        # Call FuncAnimation
-        self.animation = animation.FuncAnimation(fig,
-                                                 self._next_frame,
-                                                 frames=range(len(self.x1)),
-                                                 repeat=None,
-                                                 interval=1000*self.dt,
-                                                 blit=True)
 
                                     
