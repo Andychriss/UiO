@@ -123,8 +123,8 @@ class DoublePendulum():
     
     @property
     def kinetic(self):
-        k_1 = 0.5 * self.M1 * (self.vx1 + self.vy1)**2
-        k_2 = 0.5 * self.M2 * (self.vx2 + self.vy2)**2
+        k_1 = 0.5 * self.M1 * (self.vx1**2 + self.vy1**2)
+        k_2 = 0.5 * self.M2 * (self.vx2**2 + self.vy2**2)
         return k_1 + k_2
         
 
