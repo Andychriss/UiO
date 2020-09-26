@@ -111,16 +111,25 @@ class DoublePendulum():
         k_1 = 0.5 * self.M1 * (self.vx1**2 + self.vy1**2)
         k_2 = 0.5 * self.M2 * (self.vx2**2 + self.vy2**2)
         return k_1, k_2
+        
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
+    
     ODE = DoublePendulum(1, 1, 1, 1)
-    ODE.solve([pi/6, pi/6, 0,  0], 10, 0.01)
+    ODE.solve([pi/6, pi/6, 0,  0], 10, 1)
+    print(ODE.x1)
+    print(ODE.x2)
+    print(ODE.vx2)
     plt.plot(ODE.t, ODE.kinetic[0], color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential[0], color = "blue", label = "Potential")
-    plt.plot(ODE.t, ODE.y_1, color = "green", label = "Y1")
-    plt.plot(ODE.t, ODE.y_2, color = "grey", label = "Y2")
 
+    plt.plot(ODE.t, ODE.y_1, color = "black", label = "Y1")
+    plt.plot(ODE.t, ODE.y_2, color = "yellow", label = "Y2")
+    plt.plot(ODE.t, ODE.y_1 + ODE.y_2, color = "purple", label = "y1 +Y2")
+
+    plt.plot(ODE.t, ODE.vx1, color = "green", label = "x1")
+    plt.plot(ODE.t, ODE.vx2, color = "grey", label = "x2")
 
     plt.legend()
     plt.show()
