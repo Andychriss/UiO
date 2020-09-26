@@ -4,7 +4,7 @@ from numpy import sin, cos, pi
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 
-from matplotlib.animation import FuncAnimation
+from matplotlib import animation
         
 G = 9.81
 
