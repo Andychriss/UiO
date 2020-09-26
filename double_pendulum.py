@@ -40,7 +40,7 @@ class DoublePendulum():
         t = (0, T)
         time = T/dt
         time = np.linspace(0, T, int(time))
-        sol = solve_ivp(self.__call__, t, y0, t_eval=time, method="Radau")
+        sol = solve_ivp(self.__call__, t, y0, t_eval=time, method = "Radau")
 
         self.solution_t = np.array(sol.t)
         self.solution_theta1 = np.array(sol.y[0])
@@ -121,19 +121,30 @@ class DoublePendulum():
         k_1 = 0.5 * self.M1 * (self.vx1**2 + self.vy1**2)
         k_2 = 0.5 * self.M2 * (self.vx2**2 + self.vy2**2)
         return k_1, k_2
+        
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
+
+    ODE = DoublePendulum()
+    ODE.solve([pi/2, pi/2, pi/2, pi/2], 10, 0.01)
+    plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
+    plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
+    
     ODE = DoublePendulum(1, 1, 1, 1)
     ODE.solve([pi/6, pi/6, 0,  0], 10, 1)
+    print(ODE.x1)
+    print(ODE.x2)
+    print(ODE.vx2)
     plt.plot(ODE.t, ODE.kinetic[0], color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential[0], color = "blue", label = "Potential")
-    plt.plot(ODE.t, ODE.y_1, color = "green", label = "Y1")
-    plt.plot(ODE.t, ODE.y_2, color = "grey", label = "Y2")
-    plt.plot(ODE.t, ODE.x_1, color="black", label="X1")
-    plt.plot(ODE.t, ODE.x_2, color="yellow", label="X2")
 
+    plt.plot(ODE.t, ODE.y_1, color = "black", label = "Y1")
+    plt.plot(ODE.t, ODE.y_2, color = "yellow", label = "Y2")
+    plt.plot(ODE.t, ODE.y_1 + ODE.y_2, color = "purple", label = "y1 +Y2")
 
+    plt.plot(ODE.t, ODE.vx1, color = "green", label = "x1")
+    plt.plot(ODE.t, ODE.vx2, color = "grey", label = "x2")
 
     plt.legend()
     plt.show()
