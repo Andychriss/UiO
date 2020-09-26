@@ -101,31 +101,31 @@ class DoublePendulum():
 
     @property
     def vx1(self):
-        return np.gradient(self.x_1)
+        return np.gradient(self.x_1, self.t)
     
     @property
     def vx2(self):
-        return np.gradient(self.x_2)
+        return np.gradient(self.x_2, self.t)
 
     @property
     def vy1(self):
-        return np.gradient(self.y_1)
+        return np.gradient(self.y_1, self.t)
 
     @property
     def vy2(self):
-        return np.gradient(self.y_2)
+        return np.gradient(self.y_2, self.t)
 
     @property
     def potential(self):
         p_1 = self.M1 * G * (self.y_1 + self.L1)
         p_2 = self.M2 * G * (self.y_2 + self.L1 + self.L2)
-        return p_1, p_2
+        return p_1 + p_2
     
     @property
     def kinetic(self):
-        k_1 = 0.5 * self.M1 * (self.vx1**2 + self.vy1**2)
-        k_2 = 0.5 * self.M2 * (self.vx2**2 + self.vy2**2)
-        return k_1, k_2
+        k_1 = 0.5 * self.M1 * (self.vx1 + self.vy1)**2
+        k_2 = 0.5 * self.M2 * (self.vx2 + self.vy2)**2
+        return k_1 + k_2
         
 
     def _next_frame(self, i):
@@ -162,14 +162,16 @@ class DoublePendulum():
 
 if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
-    ODE.solve([pi/2, pi/2, 0,  0], 10, 0.0001)
+    ODE.solve([pi/2, pi/2, 0,  0], 10, 0.01)
+    plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
+    plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
+    plt.plot(ODE.t, ODE.potential + ODE.kinetic, color = "black")
     ODE.create_animation()
     ODE.show_animation()
     """print(ODE.x1)
     print(ODE.x2)
     print(ODE.vx2)
-    plt.plot(ODE.t, ODE.kinetic[0], color = "red", label = "Kinetic")
-    plt.plot(ODE.t, ODE.potential[0], color = "blue", label = "Potential")
+    
 
     plt.plot(ODE.t, ODE.y_1, color = "black", label = "Y1")
     plt.plot(ODE.t, ODE.y_2, color = "yellow", label = "Y2")
@@ -177,12 +179,7 @@ if __name__ == "__main__":
 
     plt.plot(ODE.t, ODE.vx1, color = "green", label = "x1")
     plt.plot(ODE.t, ODE.vx2, color = "grey", label = "x2")
-"""
-    fig = plt.figure()
 
-    # Configure figure
-    
-    """
     for i in range(len(ODE.t)):
         plt.axis('equal')
         plt.axis('off')
