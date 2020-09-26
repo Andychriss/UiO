@@ -167,7 +167,9 @@ if __name__ == "__main__":
     plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
     plt.plot(ODE.t, ODE.potential + ODE.kinetic, color = "black")
     ODE.create_animation()
+    ODE.save_animation()
     ODE.show_animation()
+    
     """print(ODE.x1)
     print(ODE.x2)
     print(ODE.vx2)
