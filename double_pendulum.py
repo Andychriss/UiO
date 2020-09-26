@@ -179,21 +179,19 @@ if __name__ == "__main__":
     plt.legend()
     plt.show()
 
-<<<<<<< HEAD
-=======
     def _next_frame(self, i):
-        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]),
-                            (0, self.y_1[i], self.y_2[i]))
+        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]), (0, self.y_1[i], self.y_2[i]))
         return self.pendulums,
 
     def show_animation(self):
-        plt.show
+        plt.show()
     
     def save_animation(self):
         self.animation.save("example_simulation.mp4", fps = 60)
     
-    from matplotlib.animation import FuncAnimation
+    
     def create_animation(self):
+    from matplotlib.animation import FuncAnimation
         # Create empty figure
         fig = plt.figure()
 
@@ -204,13 +202,13 @@ if __name__ == "__main__":
         self.pendulums, = plt.plot([], [], 'o-', lw=2)
 
         # Call FuncAnimation
-        self.animation = animation.FuncAnimation(fig,
+        animation.FuncAnimation(fig,
                                                  self._next_frame,
+                                                self.animation = 
                                                  frames=range(len(self.x1)),
                                                  repeat=None,
                                                  interval=1000*self.dt,
                                                  blit=True)
->>>>>>> 97f89514324a3f8db4ddc899004b275bd8e93838
 
 
 
