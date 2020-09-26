@@ -1,3 +1,4 @@
+from matplotlib.animation import FuncAnimation
 import numpy as np
 from numpy import sin, cos, pi
 from scipy.integrate import solve_ivp
@@ -178,5 +179,38 @@ if __name__ == "__main__":
     plt.legend()
     plt.show()
 
+<<<<<<< HEAD
+=======
+    def _next_frame(self, i):
+        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]),
+                            (0, self.y_1[i], self.y_2[i]))
+        return self.pendulums,
 
-                                    
+    def show_animation(self):
+        plt.show
+    
+    def save_animation(self):
+        self.animation.save("example_simulation.mp4", fps = 60)
+    
+    from matplotlib.animation import FuncAnimation
+    def create_animation(self):
+        # Create empty figure
+        fig = plt.figure()
+
+        # Configure figure
+        plt.axis('equal')
+
+        # Make an "empty" plot object to be updated throughout the animation
+        self.pendulums, = plt.plot([], [], 'o-', lw=2)
+
+        # Call FuncAnimation
+        self.animation = animation.FuncAnimation(fig,
+                                                 self._next_frame,
+                                                 frames=range(len(self.x1)),
+                                                 repeat=None,
+                                                 interval=1000*self.dt,
+                                                 blit=True)
+>>>>>>> 97f89514324a3f8db4ddc899004b275bd8e93838
+
+
+
