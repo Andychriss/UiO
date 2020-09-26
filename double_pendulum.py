@@ -1,3 +1,4 @@
+from matplotlib.animation import FuncAnimation
 import numpy as np
 from numpy import sin, cos, pi
 from scipy.integrate import solve_ivp
@@ -39,11 +40,7 @@ class DoublePendulum():
         t = (0, T)
         time = T/dt
         time = np.linspace(0, T, int(time))
-<<<<<<< HEAD
         sol = solve_ivp(self.__call__, t, y0, t_eval=time, method="Radau")
-=======
-        sol = solve_ivp(self.__call__, t, y0, t_eval=time, method = "Radau")
->>>>>>> de1d5bbe80b3ee71524e87ca18b4ee239ece1aea
 
         self.solution_t = np.array(sol.t)
         self.solution_theta1 = np.array(sol.y[0])
@@ -127,25 +124,31 @@ class DoublePendulum():
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
-<<<<<<< HEAD
-    ODE = DoublePendulum()
-    ODE.solve([pi/2, pi/2, pi/2, pi/2], 10, 0.01)
-    plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
-    plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
-    
-=======
     ODE = DoublePendulum(1, 1, 1, 1)
-    ODE.solve([pi/6, pi/6, 0,  0], 10, 0.01)
+    ODE.solve([pi/6, pi/6, 0,  0], 10, 1)
     plt.plot(ODE.t, ODE.kinetic[0], color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential[0], color = "blue", label = "Potential")
     plt.plot(ODE.t, ODE.y_1, color = "green", label = "Y1")
     plt.plot(ODE.t, ODE.y_2, color = "grey", label = "Y2")
+    plt.plot(ODE.t, ODE.x_1, color="black", label="X1")
+    plt.plot(ODE.t, ODE.x_2, color="yellow", label="X2")
 
->>>>>>> de1d5bbe80b3ee71524e87ca18b4ee239ece1aea
+
 
     plt.legend()
     plt.show()
 
+    def _next_frame(self, i):
+        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]),
+                            (0, self.y_1[i], self.y_2[i]))
+        return self.pendulums,
+
+    def show_animation(self):
+        plt.show
+    
+    def save_animation(self):
+        self.animation.save("example_simulation.mp4", fps = 60)
+    
     from matplotlib.animation import FuncAnimation
     def create_animation(self):
         # Create empty figure
@@ -165,4 +168,5 @@ if __name__ == "__main__":
                                                  interval=1000*self.dt,
                                                  blit=True)
 
-                                    
+
+
