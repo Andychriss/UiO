@@ -128,7 +128,18 @@ class DoublePendulum():
         return k_1, k_2
         
 
-    def create_animation(self):    
+    def _next_frame(self, i):
+        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]), (0, self.y_1[i], self.y_2[i]))
+        return self.pendulums,
+
+    def show_animation(self):
+        plt.show()
+    
+    def save_animation(self):
+        self.animation.save("example_simulation.mp4", fps = 60)
+    
+    
+    def create_animation(self):
         # Create empty figure
         fig = plt.figure()
 
@@ -136,15 +147,17 @@ class DoublePendulum():
         plt.axis('equal')
 
         # Make an "empty" plot object to be updated throughout the animation
-        self.pendulums = plt.plot([], [], 'o-', lw=2)
+        self.pendulums, = plt.plot([], [], 'o-', lw=2)
 
         # Call FuncAnimation
-        self.animation = animation.FuncAnimation(fig,
+        animation.FuncAnimation(fig,
                                                  self._next_frame,
+                                                self.animation = 
                                                  frames=range(len(self.x1)),
                                                  repeat=None,
                                                  interval=1000*self.dt,
                                                  blit=True)
+
 
 if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
@@ -178,37 +191,6 @@ if __name__ == "__main__":
         plt.show()
     plt.legend()
     plt.show()
-
-    def _next_frame(self, i):
-        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]), (0, self.y_1[i], self.y_2[i]))
-        return self.pendulums,
-
-    def show_animation(self):
-        plt.show()
-    
-    def save_animation(self):
-        self.animation.save("example_simulation.mp4", fps = 60)
-    
-    
-    def create_animation(self):
-    from matplotlib.animation import FuncAnimation
-        # Create empty figure
-        fig = plt.figure()
-
-        # Configure figure
-        plt.axis('equal')
-
-        # Make an "empty" plot object to be updated throughout the animation
-        self.pendulums, = plt.plot([], [], 'o-', lw=2)
-
-        # Call FuncAnimation
-        animation.FuncAnimation(fig,
-                                                 self._next_frame,
-                                                self.animation = 
-                                                 frames=range(len(self.x1)),
-                                                 repeat=None,
-                                                 interval=1000*self.dt,
-                                                 blit=True)
 
 
 
