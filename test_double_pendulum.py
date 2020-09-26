@@ -17,17 +17,17 @@ def delta(theta1, theta2):
 
 
 def domega1_dt(M1, M2, L1, L2, theta1, theta2, omega1, omega2):
-    return (M2 * L1 * omega1**2 * sin(delta(theta1, theta2)) * cos(delta(theta1, theta2)) \
-    + M2*G*sin(theta2)*cos(delta(theta1, theta2)) \
-    + M2*L2*omega2**2 * sin(delta(theta1, theta2)) \
-    - (M1 + M2)*G*sin(theta1)) /( (M1 + M2) * L1 - M2*L1*np.cos(delta(theta1, theta2))**2)
+    return (M2 * L1 * omega1**2 * sin(delta(theta1, theta2)) * cos(delta(theta1, theta2))
+            + M2 * G * sin(theta2)*cos(delta(theta1, theta2))
+            + M2*L2*omega2**2 * sin(delta(theta1, theta2))
+            - (M1 + M2)*G*sin(theta1)) / ((M1 + M2) * L1 - M2*L1*cos(delta(theta1, theta2))**2)
 
 
 def domega2_dt(M1, M2, L1, L2, theta1, theta2, omega1, omega2):
-    return (-M2 * L2 * omega2**2 * np.sin(delta(theta1, theta2)) * np.cos(delta(theta1, theta2)) \
-    + (M1 + M2) * G * np.sin(theta1) * np.cos(delta(theta1, theta2)) \
-    - (M1 + M2) * L1 * omega1**2 * np.sin(delta(theta1, theta2)) \
-    - (M1 + M2) * G * np.sin(theta2)) / ((M1 + M2) * L2 - M2 * L1 * np.cos(delta(theta1, theta2))**2)
+    return (-M2 * L2 * omega2**2 * np.sin(delta(theta1, theta2)) * np.cos(delta(theta1, theta2))
+    + (M1 + M2) * G * np.sin(theta1) * np.cos(delta(theta1, theta2))
+        - (M1 + M2) * L1 * omega1**2 * np.sin(delta(theta1, theta2))
+        - (M1 + M2) * G * np.sin(theta2)) / ((M1 + M2) * L2 - M2 * L1 * np.cos(delta(theta1, theta2))**2)
 
 
 @pytest.mark.parametrize(
@@ -79,4 +79,30 @@ def test_solve():
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
     ODE.solve([0, 0, 0, 0], 10, 0.1)
     assert np.all(ODE.theta1) == 0 and np.all(ODE.theta2) == 0 and np.all(
-        ODE.omega1) == 0 and ODE.omega2 == 0 and np.array_equal(ODE.t, np.linspace(0, 10, 100))
+        ODE.omega1) == 0 and np.all(ODE.omega2) == 0 and np.array_equal(ODE.t, np.linspace(0, 10, 100))
+
+
+def test_solveError():
+    ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
+    with pytest.raises(AttributeError):
+        assert ODE.theta1 and ODE.theta2 and ODE.omega1 and ODE.omega2 and ODE.t
+
+
+
+def test_cartesian():
+    ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
+    ODE.solve([0.15, pi/6, 0, 0], 10, 0.1)
+    tol = 10e-7
+    r = np.square(ODE.x1) + np.square(ODE.y1)
+
+    assert abs(np.all(r) - ODE.L1**2) < tol
+
+
+
+def test_cartesian1():
+    ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
+    ODE.solve([0.15, pi/6, 0, 0], 10, 0.1)
+    tol = 10e-7
+    r = np.square(ODE.x2) + np.square(ODE.y2)
+
+    assert abs(np.all(r) - ODE.L2**2) < tol

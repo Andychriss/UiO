@@ -26,7 +26,7 @@ class Pendulum():
         t = (0, T)
         time = T/dt
         time = np.linspace(0, T, int(time))
-        sol = solve_ivp(self.__call__, t, y0, t_eval=time)
+        sol = solve_ivp(self.__call__, t, y0, t_eval=time, method="Radau")
 
         self.solution_t = np.array(sol.t)
         self.solution_theta = np.array(sol.y[1])
@@ -86,7 +86,7 @@ class DampenedPendulum(Pendulum):
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
-    ODE = DampenedPendulum(1, 1, .1)
+    ODE = DampenedPendulum(1, 1)
     ODE.solve([pi/2, 1], 10, 0.01)
     t = ODE.t
     x = ODE.x
