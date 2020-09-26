@@ -145,14 +145,15 @@ class DoublePendulum():
 
         # Configure figure
         plt.axis('equal')
+        plt.axis('off')
+        plt.axis((-3, 3, -3, 3))
 
         # Make an "empty" plot object to be updated throughout the animation
         self.pendulums, = plt.plot([], [], 'o-', lw=2)
 
         # Call FuncAnimation
-        animation.FuncAnimation(fig,
+        self.animation = animation.FuncAnimation(fig,
                                                  self._next_frame,
-                                                self.animation = 
                                                  frames=range(len(self.x1)),
                                                  repeat=None,
                                                  interval=1000*self.dt,
@@ -161,7 +162,9 @@ class DoublePendulum():
 
 if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
-    ODE.solve([pi/2, pi/2, 0,  0], 10, .1)
+    ODE.solve([pi/2, pi/2, 0,  0], 10, 0.0001)
+    ODE.create_animation()
+    ODE.show_animation()
     """print(ODE.x1)
     print(ODE.x2)
     print(ODE.vx2)
@@ -179,7 +182,7 @@ if __name__ == "__main__":
 
     # Configure figure
     
-    
+    """
     for i in range(len(ODE.t)):
         plt.axis('equal')
         plt.axis('off')
@@ -191,6 +194,6 @@ if __name__ == "__main__":
         plt.show()
     plt.legend()
     plt.show()
-
+"""
 
 
