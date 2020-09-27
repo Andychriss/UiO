@@ -55,6 +55,15 @@ class DoublePendulum():
         return f
     
     def solve(self, y0, T, dt, angles="rad"):
+        """
+        Solves the differential equation using the Radau method
+
+        Keyword arguments:
+        y0 -- The initial conditions for the pendulum should be passed as a list
+        T -- The time frame of the simulation, starts from 0
+        dt -- The amount of time between each simulation step
+        angles -- The format in which the angle is given (deafult "rad")
+        """
         self.angles = angles
         if angles == 'deg':
             y0 = y0*(pi/180)
