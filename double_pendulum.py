@@ -207,28 +207,38 @@ class DoublePendulum():
 
 
 if __name__ == "__main__":
+    #Initziling a DoublePendulum object to simulate
     ODE = DoublePendulum(1, 1, 1, 1)
-    ODE.solve([pi/2, pi/2, 0,  0], 5, 0.01)
+    #Solving the differential equation
+    ODE.solve([pi/2, pi/2, 0,  0], 15, 0.01)
     
+    #Plotting the kinetic, potential and 
+    # total energy in the system over time
     plt.figure(2)
     plt.plot(ODE.t, ODE.kinetic, color="red", label="Kinetic")
     plt.plot(ODE.t, ODE.potential, color="blue", label="Potential")
     plt.plot(ODE.t, ODE.potential + ODE.kinetic, color="black")
 
+    #Plotting the path of the first DoublePendulum object
     plt.figure(1)    
     plt.plot(ODE.x_2, ODE.y_2)
 
-    #Initsialiser
+    #Plotting the path of the second DoublePendulum object
     ODE2 = DoublePendulum(1, 1, 1, 1)
-    ODE2.solve([pi/2 + 0.01, pi/2, 0,  0], 5, 0.01)
+    ODE2.solve([pi/2 + 0.01, pi/2, 0,  0], 15, 0.01)
     plt.plot(ODE2.x_2, ODE2.y_2, color="green")
 
+    #Plotting the path of the third DoublePendulum object
     ODE3 = DoublePendulum(1, 1, 1, 1)
-    ODE3.solve([pi/2, pi/2, 0.01, 0], 5, 0.01)
-    plt.plot(ODE3.x_2, ODE3.y_2, color="red")
+    ODE3.solve([pi/2, pi/2, 0.01, 0], 15, 0.01)
+    plt.plot(ODE3.x_2 - 0.01, ODE3.y_2, color="red")
 
+    #Creating the animation of the first DoublePendulum object
     ODE.create_animation()
     
-    #ODE.save_animation()
+    #Saves the animation
+    ODE.save_animation()
+    
+    #Shows the animation and the trajectiores of the other pendulums
     ODE.show_animation()
     
