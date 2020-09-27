@@ -163,6 +163,8 @@ class DoublePendulum():
 if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
     ODE.solve([pi/2, pi/2, 0,  0], 10, 0.01)
+    ODE.solve([pi/2, 0.99 * pi/2, 0,  0], 10, 0.01)
+    ODE.solve([pi/2, 0.98 * pi/2, 0,  0], 10, 0.01)
     plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
     plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
     plt.plot(ODE.t, ODE.potential + ODE.kinetic, color = "black")
