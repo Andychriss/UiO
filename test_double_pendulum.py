@@ -106,7 +106,7 @@ def test_solveError():
 
 
 def test_cartesian():
-    """Tests that the mass of the pendulum always will be length L away from origo
+    """Tests that the mass of the first pendulum always will be length L1 away from origo
     """
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
     ODE.solve([0.15, pi/6, 0, 0], 10, 0.1)
@@ -118,12 +118,10 @@ def test_cartesian():
 
 
 def test_cartesian1():
+    """Tests that the mass of the second pendulum always will be length L2 away from the first pendulum
+    """
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
-    ODE.solve([0.15, pi/6, 0, 0], 10, 0.1)
+    ODE.solve([pi/2, 0, pi/2, 0], 10, 0.1)
     tol = 10e-7
-    r = np.square(ODE.x2) + np.square(ODE.y2)
-    print(r)
-    print(ODE.L2**2)
-    print((abs(r - ODE.L2**2)))
+    r = np.square(ODE.x2 - ODE.x1) + np.square(ODE.y2 - ODE.y1)
     assert np.all(abs(r - ODE.L2**2) < tol)
-test_cartesian1()
