@@ -17,17 +17,29 @@ def delta(theta1, theta2):
 
 
 def domega1_dt(M1, M2, L1, L2, theta1, theta2, omega1, omega2):
-    return (M2 * L1 * omega1**2 * sin(delta(theta1, theta2)) * cos(delta(theta1, theta2))
-            + M2 * G * sin(theta2)*cos(delta(theta1, theta2))
-            + M2*L2*omega2**2 * sin(delta(theta1, theta2))
-            - (M1 + M2)*G*sin(theta1)) / ((M1 + M2) * L1 - M2*L1*cos(delta(theta1, theta2))**2)
+    return (
+            (M2 * L1 * omega1**2 * sin(delta(theta1, theta2))
+            * cos(delta(theta1, theta2))
+            + M2 * G * sin(theta2)
+            * cos(delta(theta1, theta2))
+            + M2*L2*omega2**2 
+            * sin(delta(theta1, theta2))
+            - (M1 + M2)*G*sin(theta1)) /
+            ((M1 + M2) * L1 - M2*L1
+            * cos(delta(theta1, theta2))**2))
 
 
 def domega2_dt(M1, M2, L1, L2, theta1, theta2, omega1, omega2):
-    return (-M2 * L2 * omega2**2 * np.sin(delta(theta1, theta2)) * np.cos(delta(theta1, theta2))
-    + (M1 + M2) * G * np.sin(theta1) * np.cos(delta(theta1, theta2))
-        - (M1 + M2) * L1 * omega1**2 * np.sin(delta(theta1, theta2))
-        - (M1 + M2) * G * np.sin(theta2)) / ((M1 + M2) * L2 - M2 * L1 * np.cos(delta(theta1, theta2))**2)
+    return (
+            (-M2 * L2 * omega2**2 * np.sin(delta(theta1, theta2))
+            * np.cos(delta(theta1, theta2))
+            + (M1 + M2) * G * np.sin(theta1) 
+            * np.cos(delta(theta1, theta2))
+            - (M1 + M2) * L1 * omega1**2 
+            * np.sin(delta(theta1, theta2))
+            - (M1 + M2) * G * np.sin(theta2)) / 
+            ((M1 + M2) * L2 - M2 * L1 
+            * np.cos(delta(theta1, theta2))**2))
 
 
 @pytest.mark.parametrize(
