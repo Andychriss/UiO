@@ -13,9 +13,11 @@ class DoublePendulum():
 
     Keyword arguments:
     M1 -- Mass of the first pendulum object (deafult 1)
-    L1 -- Length of the rod connecting the first pendulum object to origo (deafult 1)
+    L1 -- Length of the rod connecting the first 
+    pendulum object to origo (deafult 1)
     M2 -- Mass of the second pendulum object (deafult 1) 
-    L2 -- Length of the rod connecting the sectond pendulum object to the first (deafult 1)
+    L2 -- Length of the rod connecting the 
+    second pendulum object to the first (deafult 1)
     """
     def __init__(self, M1=1, L1=1, M2=1, L2=1):
         self.M1 = M1
