@@ -6,7 +6,7 @@ from scipy.integrate import solve_ivp
 g = 9.81
 
 class Pendulum():
-    def __init__(self, L = 1, M = 1):
+    def __init__(self, L=1, M=1):
         self.L = L
         self.M = M
         
@@ -98,9 +98,9 @@ if __name__ == "__main__":
     potential = ODE.potential
     total = kinetic + potential
 
-    plt.plot(t, kinetic, color = "yellow", label = "kinetic")
-    plt.plot(t, potential, color = "green", label = "potential")
+    plt.plot(t, kinetic, color="yellow", label="kinetic")
+    plt.plot(t, potential, color="green", label="potential")
 
-    plt.plot(t, total, color = "black", label = "Total Energy")
+    plt.plot(t, total, color="black", label="Total Energy")
     plt.legend()
     plt.show()

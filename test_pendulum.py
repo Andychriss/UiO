@@ -6,8 +6,7 @@ from numpy import pi
 
 
 @pytest.mark.parametrize(
-    "y", [(-109/60, 0.15)]
-)
+    "y", [(-109/60, 0.15)])
 def test_pendulum(y):
     ODE = pendulum.Pendulum(2.7, 1)
     ODEder = ODE(0, [0.15, pi/6])
@@ -27,8 +26,7 @@ def test_solveError():
         assert ODE.theta and ODE.omega and ODE.t
 
 @pytest.mark.parametrize(
-    "y", [(-109/60, 0.15)]
-)
+    "y", [(-109/60, 0.15)])
 def test_cartesian(y):
     ODE = pendulum.Pendulum(1, 1)
     ODE.solve([0.15, pi/6], 10, 0.1)

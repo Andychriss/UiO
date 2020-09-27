@@ -9,6 +9,14 @@ from matplotlib import animation
 G = 9.81
 
 class DoublePendulum():
+    """Calculates a double pendulums movements
+
+    Keyword arguments:
+    M1 -- Mass of the first pendulum object (deafult 1)
+    L1 -- Length of the rod connecting the first pendulum object to origo (deafult 1)
+    M2 -- Mass of the second pendulum object (deafult 1) 
+    L2 -- Length of the rod connecting the sectond pendulum object to the first (deafult 1)
+    """
     def __init__(self, M1=1, L1=1, M2=1, L2=1):
         self.M1 = M1
         self.L1 = L1
@@ -21,18 +29,29 @@ class DoublePendulum():
     def __call__(self, t, y):
         #return derivative of y
         theta1, omega1, theta2, omega2 = y
-        f = [omega1, 
-             (self.M2 * self.L1 * omega1**2 * sin(self.delta(theta1, theta2)) * cos(self.delta(theta1, theta2))
-              + self.M2 * G * sin(theta2)*cos(self.delta(theta1, theta2))
-              + self.M2*self.L2*omega2**2 * sin(self.delta(theta1, theta2))
-              - (self.M1 + self.M2)*G*sin(theta1)) / ((self.M1 + self.M2) * self.L1 - self.M2*self.L1*cos(self.delta(theta1, theta2))**2),
-        omega2, 
-             (-self.M2 * self.L2 * omega2**2 * np.sin(self.delta(theta1, theta2)) * np.cos(self.delta(theta1, theta2))
-              + (self.M1 + self.M2) * G * np.sin(theta1) *
-                 np.cos(self.delta(theta1, theta2))
-              - (self.M1 + self.M2) * self.L1 * omega1**2 *
-                 np.sin(self.delta(theta1, theta2))
-                 - (self.M1 + self.M2) * G * np.sin(theta2)) / ((self.M1 + self.M2) * self.L2 - self.M2 * self.L1 * np.cos(self.delta(theta1, theta2))**2)]
+        f = [
+        omega1, (self.M2 * self.L1 * omega1**2 
+                * sin(self.delta(theta1, theta2)) 
+                * cos(self.delta(theta1, theta2))
+                + self.M2 * G * sin(theta2)
+                * cos(self.delta(theta1, theta2))
+                + self.M2 * self.L2 * omega2**2 
+                * sin(self.delta(theta1, theta2))
+                - (self.M1 + self.M2)*G*sin(theta1)) / 
+                ((self.M1 + self.M2) * self.L1 
+                - self.M2 * self.L1
+                * cos(self.delta(theta1, theta2))**2),
+        omega2, (-self.M2 * self.L2 * omega2**2 
+                * np.sin(self.delta(theta1, theta2)) 
+                * np.cos(self.delta(theta1, theta2))
+                + (self.M1 + self.M2) * G * np.sin(theta1)
+                * np.cos(self.delta(theta1, theta2))
+                - (self.M1 + self.M2) * self.L1 * omega1**2 
+                * np.sin(self.delta(theta1, theta2))
+                - (self.M1 + self.M2) * G * np.sin(theta2)) / 
+                ((self.M1 + self.M2) * self.L2 - self.M2 * 
+                self.L1 * np.cos(self.delta(theta1, theta2))**2)
+        ]
         return f
     
     def solve(self, y0, T, dt, angles="rad"):
@@ -45,7 +64,8 @@ class DoublePendulum():
         t = (0, T)
         time = T/dt
         time = np.linspace(0, T, int(time))
-        sol = solve_ivp(self.__call__, t, y0, t_eval=time, method = "Radau")
+        sol = solve_ivp(self.__call__, t, y0, 
+                        t_eval=time, method="Radau")
 
         self.solution_t = np.array(sol.t)
         self.solution_theta1 = np.array(sol.y[0])
@@ -129,7 +149,8 @@ class DoublePendulum():
         
 
     def _next_frame(self, i):
-        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]), (0, self.y_1[i], self.y_2[i]))
+        self.pendulums.set_data((0, self.x_1[i], self.x_2[i]), 
+                                (0, self.y_1[i], self.y_2[i]))
         return self.pendulums,
 
     def show_animation(self):
@@ -141,27 +162,30 @@ class DoublePendulum():
     
     def create_animation(self):
         # Create empty figure
-        fig = plt.figure()
+        fig = plt.figure(1)
 
         # Configure figure
         plt.axis('equal')
         plt.axis('off')
         plt.axis((-3, 3, -3, 3))
 
-        # Make an "empty" plot object to be updated throughout the animation
+        # Make an "empty" plot object to be updated throughout 
+        # the animation
         self.pendulums, = plt.plot([], [], 'o-', lw=2)
 
         # Call FuncAnimation
-        self.animation = animation.FuncAnimation(fig,
-                                                 self._next_frame,
-                                                 frames=range(len(self.x1)),
-                                                 repeat=None,
-                                                 interval=1000*self.dt,
-                                                 blit=True)
+        self.animation = animation.FuncAnimation(
+                                    fig,
+                                    self._next_frame,
+                                    frames=range(len(self.x1)),
+                                    repeat=None,
+                                    interval=1000*self.dt,
+                                    blit=True)
 
 
 if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
+<<<<<<< HEAD
     ODE.solve([pi/2, pi/2, 0,  0], 10, 0.01)
     ODE.solve([pi/2, 0.99 * pi/2, 0,  0], 10, 0.01)
     ODE.solve([pi/2, 0.98 * pi/2, 0,  0], 10, 0.01)
@@ -175,26 +199,28 @@ if __name__ == "__main__":
     """print(ODE.x1)
     print(ODE.x2)
     print(ODE.vx2)
+=======
+    ODE.solve([pi/2, pi/2, 0,  0], 5, 0.01)
+>>>>>>> 7c290d1ff765435e4384124c7794ba27e22ecbf4
     
+    plt.figure(2)
+    plt.plot(ODE.t, ODE.kinetic, color="red", label="Kinetic")
+    plt.plot(ODE.t, ODE.potential, color="blue", label="Potential")
+    plt.plot(ODE.t, ODE.potential + ODE.kinetic, color="black")
 
-    plt.plot(ODE.t, ODE.y_1, color = "black", label = "Y1")
-    plt.plot(ODE.t, ODE.y_2, color = "yellow", label = "Y2")
-    plt.plot(ODE.t, ODE.y_1 + ODE.y_2, color = "purple", label = "y1 +Y2")
+    plt.figure(1)    
+    plt.plot(ODE.x_2, ODE.y_2)
 
-    plt.plot(ODE.t, ODE.vx1, color = "green", label = "x1")
-    plt.plot(ODE.t, ODE.vx2, color = "grey", label = "x2")
+    ODE2 = DoublePendulum(1, 1, 1, 1)
+    ODE2.solve([pi/2 + 0.01, pi/2, 0,  0], 5, 0.01)
+    plt.plot(ODE2.x_2, ODE2.y_2, color="green")
 
-    for i in range(len(ODE.t)):
-        plt.axis('equal')
-        plt.axis('off')
-        plt.axis((-3, 3, -3, 3))
-        plt.plot([ODE.x1[i], 0], [ODE.y1[i], 0])
-        plt.plot([ODE.x2[i], ODE.x1[i]], [ODE.y2[i], ODE.y1[i]])
-        plt.scatter(ODE.x1[i], ODE.y1[i])
-        plt.scatter(ODE.x2[i], ODE.y2[i])
-        plt.show()
-    plt.legend()
-    plt.show()
-"""
+    ODE3 = DoublePendulum(1, 1, 1, 1)
+    ODE3.solve([pi/2, pi/2, 0.01,  0], 5, 0.01)
+    plt.plot(ODE3.x_2, ODE3.y_2, color="red")
 
-
+    ODE.create_animation()
+    
+    #ODE.save_animation()
+    ODE.show_animation()
+    
