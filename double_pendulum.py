@@ -220,7 +220,7 @@ if __name__ == "__main__":
     plt.plot(ODE.t, ODE.potential + ODE.kinetic, color="black")
 
     #Plotting the path of the first DoublePendulum object
-    plt.figure(1)    
+    plt.figure(3)    
     plt.plot(ODE.x_2, ODE.y_2)
 
     #Plotting the path of the second DoublePendulum object
@@ -233,6 +233,9 @@ if __name__ == "__main__":
     ODE3.solve([pi/2, pi/2, 0.01, 0], 15, 0.01)
     plt.plot(ODE3.x_2 - 0.01, ODE3.y_2, color="red")
 
+    #Saving the figure of the trajectory plot for the pendulum objects
+    plt.savefig("chaotic_pendulum.png")
+    
     #Creating the animation of the first DoublePendulum object
     ODE.create_animation()
     
