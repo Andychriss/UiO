@@ -205,7 +205,23 @@ class DoublePendulum():
 
 if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
+<<<<<<< HEAD
+    ODE.solve([pi/2, pi/2, 0,  0], 10, 0.01)
+    ODE.solve([pi/2, 0.99 * pi/2, 0,  0], 10, 0.01)
+    ODE.solve([pi/2, 0.98 * pi/2, 0,  0], 10, 0.01)
+    plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
+    plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
+    plt.plot(ODE.t, ODE.potential + ODE.kinetic, color = "black")
+    ODE.create_animation()
+    ODE.save_animation()
+    ODE.show_animation()
+    
+    """print(ODE.x1)
+    print(ODE.x2)
+    print(ODE.vx2)
+=======
     ODE.solve([pi/2, pi/2, 0,  0], 5, 0.01)
+>>>>>>> 7c290d1ff765435e4384124c7794ba27e22ecbf4
     
     plt.figure(2)
     plt.plot(ODE.t, ODE.kinetic, color="red", label="Kinetic")
