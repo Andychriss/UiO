@@ -88,25 +88,30 @@ def test_domega2_dt(theta1, theta2, expected):
 
 
 def test_solve():
-    """Tests that the solve function will agree that the pendulum will hang still if the inputs are 0
+    """Tests that the solve function will agree that the 
+    pendulum will hang still if the inputs are 0
     """
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
     ODE.solve([0, 0, 0, 0], 10, 0.1)
     assert np.all(ODE.theta1) == 0 and np.all(ODE.theta2) == 0 and np.all(
-        ODE.omega1) == 0 and np.all(ODE.omega2) == 0 and np.array_equal(ODE.t, np.linspace(0, 10, 100))
+        ODE.omega1) == 0 and np.all(ODE.omega2) == 0 
+        and np.array_equal(ODE.t, np.linspace(0, 10, 100))
 
 
 def test_solveError():
-    """Tests that pendulum.py will return an attribute error when the solve function is not called
+    """Tests that pendulum.py will return an attribute 
+    error when the solve function is not called
     """
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
     with pytest.raises(AttributeError):
-        assert ODE.theta1 and ODE.theta2 and ODE.omega1 and ODE.omega2 and ODE.t
+        assert ODE.theta1 and ODE.theta2 
+        and ODE.omega1 and ODE.omega2 and ODE.t
 
 
 
 def test_cartesian():
-    """Tests that the mass of the first pendulum always will be length L1 away from origo
+    """Tests that the mass of the first pendulum 
+    always will be length L1 away from origo
     """
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
     ODE.solve([0.15, pi/6, 0, 0], 10, 0.1)
@@ -118,7 +123,8 @@ def test_cartesian():
 
 
 def test_cartesian1():
-    """Tests that the mass of the second pendulum always will be length L2 away from the first pendulum
+    """Tests that the mass of the second pendulum always 
+    will be length L2 away from the first pendulum
     """
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
     ODE.solve([pi/2, 0, pi/2, 0], 10, 0.1)

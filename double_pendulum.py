@@ -28,8 +28,8 @@ class DoublePendulum():
         return theta2 - theta1
 
     def __call__(self, t, y):
-        """Returns the derivatives of omega and theta of the two pendulum objects"""
-        #return derivative of y
+        """Returns the derivatives of omega and theta
+        of the two pendulum objects"""
         theta1, omega1, theta2, omega2 = y
         f = [
         omega1, (self.M2 * self.L1 * omega1**2 
@@ -61,7 +61,8 @@ class DoublePendulum():
         Solves the differential equation using the Radau method
 
         Keyword arguments:
-        y0 -- The initial conditions for the pendulum should be passed as a list
+        y0 -- The initial conditions for the 
+        pendulum should be passed as a list
         T -- The time frame of the simulation, starts from 0
         dt -- The amount of time between each simulation step
         angles -- The format in which the angle is given (deafult "rad")
@@ -205,23 +206,7 @@ class DoublePendulum():
 
 if __name__ == "__main__":
     ODE = DoublePendulum(1, 1, 1, 1)
-<<<<<<< HEAD
-    ODE.solve([pi/2, pi/2, 0,  0], 10, 0.01)
-    ODE.solve([pi/2, 0.99 * pi/2, 0,  0], 10, 0.01)
-    ODE.solve([pi/2, 0.98 * pi/2, 0,  0], 10, 0.01)
-    plt.plot(ODE.t, ODE.kinetic, color = "red", label = "Kinetic")
-    plt.plot(ODE.t, ODE.potential, color = "blue", label = "Potential")
-    plt.plot(ODE.t, ODE.potential + ODE.kinetic, color = "black")
-    ODE.create_animation()
-    ODE.save_animation()
-    ODE.show_animation()
-    
-    """print(ODE.x1)
-    print(ODE.x2)
-    print(ODE.vx2)
-=======
     ODE.solve([pi/2, pi/2, 0,  0], 5, 0.01)
->>>>>>> 7c290d1ff765435e4384124c7794ba27e22ecbf4
     
     plt.figure(2)
     plt.plot(ODE.t, ODE.kinetic, color="red", label="Kinetic")

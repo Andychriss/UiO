@@ -30,7 +30,8 @@ class Pendulum():
         Solves the differential equation using the Radau method
 
         Keyword arguments:
-        y0 -- The initial conditions for the pendulum should be passed as a list
+        y0 -- The initial conditions for the 
+        pendulum should be passed as a list
         T -- The time frame of the simulation, starts from 0
         dt -- The amount of time between each simulation step
         angles -- The format in which the angle is given (deafult "rad")
@@ -109,7 +110,8 @@ class DampenedPendulum(Pendulum):
         self.B = B
 
     def __call__(self, t, y):
-        """Returns the derivative of y, which should be the two values omega and theta
+        """Returns the derivative of y, which 
+        should be the two values omega and theta
         
         """
 
@@ -118,7 +120,8 @@ class DampenedPendulum(Pendulum):
         return f
         
 if __name__ == "__main__":
-    """Plots the x and y values of the solve function with inputs set to y0 = pi/2, 1 T = 10 and dt = 0.01
+    """Plots the x and y values of the solve 
+    function with inputs set to y0 = pi/2, 1 T = 10 and dt = 0.01
     Also plots the kinetic, potential and total energy of the pendulum
     """
     import matplotlib.pyplot as plt
