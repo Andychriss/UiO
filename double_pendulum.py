@@ -24,9 +24,11 @@ class DoublePendulum():
         self.L2 = L2
 
     def delta(self, theta1, theta2):
+        """Returns the delta of the two theta values given"""
         return theta2 - theta1
 
     def __call__(self, t, y):
+        """Returns the derivatives of omega and theta of the two pendulum objects"""
         #return derivative of y
         theta1, omega1, theta2, omega2 = y
         f = [
@@ -130,28 +132,34 @@ class DoublePendulum():
 
     @property
     def vx1(self):
+        """Returns the rate of change in x_1 over time"""
         return np.gradient(self.x_1, self.t)
     
     @property
     def vx2(self):
+        """Returns the rate of change in x_2 over time"""
         return np.gradient(self.x_2, self.t)
 
     @property
     def vy1(self):
+        """Returns the rate of change in y_1 over time"""
         return np.gradient(self.y_1, self.t)
 
     @property
     def vy2(self):
+        """Returns the rate of change in y_2 over time"""
         return np.gradient(self.y_2, self.t)
 
     @property
     def potential(self):
+        """Returns a list of the potential energies in the double pendulum"""
         p_1 = self.M1 * G * (self.y_1 + self.L1)
         p_2 = self.M2 * G * (self.y_2 + self.L1 + self.L2)
         return p_1 + p_2
     
     @property
     def kinetic(self):
+        """Returns a list of the kinetic energies in the double pendulum"""
         k_1 = 0.5 * self.M1 * (self.vx1**2 + self.vy1**2)
         k_2 = 0.5 * self.M2 * (self.vx2**2 + self.vy2**2)
         return k_1 + k_2
@@ -163,13 +171,16 @@ class DoublePendulum():
         return self.pendulums,
 
     def show_animation(self):
+        """Shows the animation of the pendulum"""
         plt.show()
     
     def save_animation(self):
+        """Saves the animation as a .mp4 file"""
         self.animation.save("example_simulation.mp4", fps = 60)
     
     
     def create_animation(self):
+        """Initializes the animation of the double pendulum"""
         # Create empty figure
         fig = plt.figure(1)
 
@@ -220,12 +231,13 @@ if __name__ == "__main__":
     plt.figure(1)    
     plt.plot(ODE.x_2, ODE.y_2)
 
+    #Initsialiser
     ODE2 = DoublePendulum(1, 1, 1, 1)
     ODE2.solve([pi/2 + 0.01, pi/2, 0,  0], 5, 0.01)
     plt.plot(ODE2.x_2, ODE2.y_2, color="green")
 
     ODE3 = DoublePendulum(1, 1, 1, 1)
-    ODE3.solve([pi/2, pi/2, 0.01,  0], 5, 0.01)
+    ODE3.solve([pi/2, pi/2, 0.01, 0], 5, 0.01)
     plt.plot(ODE3.x_2, ODE3.y_2, color="red")
 
     ODE.create_animation()
