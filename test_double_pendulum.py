@@ -107,7 +107,7 @@ def test_cartesian():
     tol = 10e-7
     r = np.square(ODE.x1) + np.square(ODE.y1)
 
-    assert abs(np.all(r) - ODE.L1**2) < tol
+    assert np.all(abs(r - ODE.L1**2) < tol)
 
 
 
@@ -116,5 +116,8 @@ def test_cartesian1():
     ODE.solve([0.15, pi/6, 0, 0], 10, 0.1)
     tol = 10e-7
     r = np.square(ODE.x2) + np.square(ODE.y2)
-
-    assert abs(np.all(r) - ODE.L2**2) < tol
+    print(r)
+    print(ODE.L2**2)
+    print((abs(r - ODE.L2**2)))
+    assert np.all(abs(r - ODE.L2**2) < tol)
+test_cartesian1()
