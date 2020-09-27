@@ -113,11 +113,7 @@ def test_cartesian():
 
 def test_cartesian1():
     ODE = double_pendulum.DoublePendulum(1, 1, 1, 1)
-    ODE.solve([0.15, pi/6, 0, 0], 10, 0.1)
+    ODE.solve([pi/2, 0, pi/2, 0], 10, 0.1)
     tol = 10e-7
-    r = np.square(ODE.x2) + np.square(ODE.y2)
-    print(r)
-    print(ODE.L2**2)
-    print((abs(r - ODE.L2**2)))
+    r = np.square(ODE.x2 - ODE.x1) + np.square(ODE.y2 - ODE.y1)
     assert np.all(abs(r - ODE.L2**2) < tol)
-test_cartesian1()
